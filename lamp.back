@@ -1,0 +1,48 @@
+pkg-init:
+  pkg.installed:
+    - names:
+      - httpd
+      - php
+      - mariadb
+      - mariadb-server
+      - php-mysql
+      - php-cli
+      - php-mbstring
+
+apache-config:
+  file.managed:
+    - name: /etc/httpd/conf.d/httpd.conf
+    - source: salt://lamp/files/httpd.conf
+    - user: root
+    - group: root
+    - mode: 644
+
+php-config:
+  file.managed:
+    - name: /etc/php.ini
+    - source: salt://lamp/files/php.ini
+    - user: root
+    - group: root
+    - mode: 644
+
+mysql-config:
+  file.managed:
+    - name: /etc/my.cnf
+    - source: salt//lamp/files/my.cnf
+    - user: root
+    - group: root
+    - mode：644
+
+apache-service:
+  service.runing:
+    - name: httpd
+    - enable: True
+    - reload: True
+
+mysql-service:
+  service.runing:
+    - name: mariadb
+    - enable: True
+    - reload: True
+
+
